@@ -1,0 +1,2 @@
+class Loterium < ApplicationRecord
+end

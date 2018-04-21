@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Autor: Ricardo Barbosa Malafaia.
 
-Things you may want to cover:
+* 8bit Loteria
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Este é o repositório com o código da 8bit loteria, todos os direitos reservados.

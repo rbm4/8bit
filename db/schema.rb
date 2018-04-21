@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_152930) do
+ActiveRecord::Schema.define(version: 2018_04_21_185817) do
+
+  create_table "loteria", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "payments", force: :cascade do |t|
     t.string "amount_tck"
