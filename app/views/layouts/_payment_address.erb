@@ -1,0 +1,41 @@
+<style>
+    .qr-table {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+}
+
+    .td-table {
+  border-left: solid 6px #000;
+  padding: 0; 
+  margin: 0; 
+  width: 0px; 
+  height: 6px; 
+}
+
+td.black { border-color: #000; }
+td.white { border-color: #fff; }
+</style>
+
+
+<%= @message.html_safe %>
+<br>
+Caso preferir, leia o QR code abaixo com seu aplicativo de carteira preferido:
+<br>
+<table class="qr-table">
+ <% @qr.modules.each_index do |x| -%>
+   <tr>
+   <% @qr.modules.each_index do |y| -%>
+    <% if @qr.dark?(x,y) -%>
+    <td class="td-table black"/>
+    <% else -%>
+    <td class="td-table white"/>
+    <% end -%>
+   <% end -%>
+   </tr>
+ <% end -%>
+</table>
+<br>
+<%= button_to "Voltar", "#{session.delete(:return_to)}", class: "btn btn-info" %>
+

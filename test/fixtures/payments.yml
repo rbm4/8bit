@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount_tck: MyString
+  currency: MyString
+  status: MyString
+  address: MyString
+
+two:
+  amount_tck: MyString
+  currency: MyString
+  status: MyString
+  address: MyString

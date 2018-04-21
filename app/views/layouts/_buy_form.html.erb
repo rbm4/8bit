@@ -1,0 +1,49 @@
+<div class="row"><div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+    
+    <fieldset>
+    <legend class="no-padding">
+        <div class="center">Compra de tickets</div><h6>
+        <p><b>Selecione a moeda: </b></p>
+        <ul class="nav nav-tabs">
+        <% CURRENCIES.each do |k| %>
+          <li class="nav-item">
+            <a class="nav-link padding-label-side" href="/currency/<%= k %>"><%= k %></a>
+          </li>
+        <% end %>
+        </ul></h6>
+    </legend>
+    <%= form_tag '/buy_ticket', remote: true, id: "buy_tck_form" %>
+        <div class="form-group">
+            <%= label_tag "amount", "Quantidade de tickets (#{@currency}):"  %>
+            <%= number_field_tag "amount", 0, class: "form-control", id: "qtd_tck", data: {price: "#{@cost}", currency: "#{@currency}"} %>
+        </div>
+        <div class="form-group">
+            Custo: <b><%= "#{@cost} #{@currency}" %></b>
+            <%= hidden_field_tag :currency, @currency %>
+        </div>
+        <div class="form-group">
+            <%= label_tag "estimate", "Estimativa:"  %>
+            <%= text_field_tag "estimate", nil, placeholder: "0.0000000 #{@currency}", disabled: true, class: "form-control", id: "amount_estimate" %>
+        </div>
+        <div class="form-group">
+            <%= label_tag "wallet", "Carteira para receber:"  %>
+            <%= text_field_tag "wallet", nil, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= submit_tag "Comprar", class: "form-control", id: "submit_form_btt" %>
+            <i class="fa fa-refresh fa-spin fa-3x d-none" aria-hidden="true" id="loading_element"></i>
+        </div>
+        <script>
+            $("#qtd_tck").change(function(){
+               value = parseFloat($(this).data("price"));
+               $("#amount_estimate").val((value * $(this).val()).toFixed(8) + " " + $(this).data("currency"));
+            });
+            $("#submit_form_btt").click(function(){
+                $(this).addClass('d-none')
+                $("#loading_element").removeClass("d-none")
+            })
+        </script>
+    </form>
+</fieldset>
+    
+</div></div>

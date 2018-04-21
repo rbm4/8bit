@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wallet: MyString
+  size: MyString
+  valid: false
+  currency: MyString
+
+two:
+  wallet: MyString
+  size: MyString
+  valid: false
+  currency: MyString

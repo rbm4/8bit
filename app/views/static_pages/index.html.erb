@@ -1,0 +1,66 @@
+<div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 center side-bar fill-height no-padding row"> 
+
+<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3 no-padding"></div>
+<div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 no-padding">
+    <div class="card  margin-page">
+        <div class="card-body">
+            <fieldset>
+                <legend>Premiações</legend>
+                <table class="fill-width">
+                    <tr>
+                        <th colspan="4">Total de tickets ativos: <%= @total %></th>
+                    </tr>
+                    <tr>
+                        <td colspan="4" id="txt"></td>
+                    </tr>
+                    <% counter = 0 %>
+                    <% PROPORTIONS.each do |k| %>
+                     <tr> 
+                  		<td> <%= counter = counter+1 %> - </td> 
+                  		<td colspan="3"> <%= (BigDecimal((@total * @cost) * BigDecimal("#{(BigDecimal(k,8)/100)}")).truncate(8)).to_s %> <b><%= @currency %></b> </td> 
+                      </tr>
+                    <% end %>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+<div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 fill-height no-padding row">
+    <div class="col-md-3 col-lg-3 col-xs-3 col-sm-3 no-padding"></div>
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 margin-page no-padding">
+        <div class="card">
+            <div class="card-body">
+                <div id="warn_message"> </div>
+                <div id="ticket_form">
+                    <%= render 'layouts/buy_form' %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+$( document ).ready(function(){
+   // startTime();
+})
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+</script>

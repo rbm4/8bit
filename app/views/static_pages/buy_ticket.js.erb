@@ -1,0 +1,11 @@
+$("#submit_form_btt").removeClass('d-none')
+$("#loading_element").addClass("d-none")
+$("#warn_message").html("<%= @message %>")
+<% if @invalid %> 
+$("#warn_message").addClass("red")
+$("#warn_message").removeClass("d-none")
+<% else %>
+$("#warn_message").removeClass("red")
+$("#warn_message").addClass("d-none")
+$("#ticket_form").html("<%= escape_javascript( render partial: "/layouts/payment_address" ) %>")
+<% end %>
