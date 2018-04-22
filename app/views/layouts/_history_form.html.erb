@@ -1,0 +1,12 @@
+<%= form_tag "/email_notify", remote: true %>
+<table>
+    <tr>
+        <td>
+            <%= text_field_tag "wallet", nil, placeholder: "Endereço #{@currency}",  class: "form-control" %>
+        </td>
+        <td>
+            <%= submit_tag "Enviar", class: "form-control" %>
+        </td>
+    </tr>
+</table>
+</form>

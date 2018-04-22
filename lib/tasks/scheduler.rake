@@ -37,7 +37,6 @@ task :roll_lotterys, [:secret, :key, :sendgrid] => :environment do |t, chave|
                         j = Ticket.where(:active => true,  :wallet => user_premiado).first
                         p "Enviado #{cur} aqui para o ganhador #{user_premiado}, no valor de #{premio_string}, para o endereço #{piscina_tickets[premiado]}\n"
                         #eniar valor aqui
-                        # loterium.parabenizar_ganho(user_premiado, premio_string, chave.sendgrid)
                         j.active = false
                         j.save
                         total_sorteavel = Integer(total_sorteavel) - Integer(j.size) #diminuir toda a proporção do ticket do sorteio
@@ -54,6 +53,7 @@ task :roll_lotterys, [:secret, :key, :sendgrid] => :environment do |t, chave|
             g.save
         end
         p "Sorteio concluído"
+        # loterium.parabenizar_ganho(user_premiado, premio_string, chave.sendgrid) notificar usuários sobre 
     else
         p "data errada, não fazer nada"
     end
