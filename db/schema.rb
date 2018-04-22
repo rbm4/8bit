@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_185817) do
+ActiveRecord::Schema.define(version: 2018_04_22_213256) do
 
   create_table "loteria", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(version: 2018_04_21_185817) do
     t.string "status"
     t.string "address_payment"
     t.string "address_receive"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "premiados", force: :cascade do |t|
+    t.string "sorteio_id"
+    t.string "wallet"
+    t.string "qtd"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "premio_entregue"
+    t.string "position"
+  end
+
+  create_table "sorteios", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
