@@ -35,7 +35,7 @@ class NotifyController < ApplicationController
                     tck.active = true
                     tck.wallet = @payment.address_receive
                     tck.currency = @payment.currency
-                    @payment.amount_tck = @payment.amount_tck - Integer(amount)
+                    @payment.amount_tck = Integer(@payment.amount_tck) - Integer(amount)
                 else
                     tck = @ticket.first
                     tck.size = Integer(tck.size) + Integer(amount)
