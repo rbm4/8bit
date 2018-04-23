@@ -11,4 +11,10 @@ class Loterium < ApplicationRecord
         p cur
         Coinpayments.balances({"all": 1})[:"#{cur}"][:balancef]
     end
+    def notify_lot_result
+        k = Email.all
+        k.each do |email|
+            email.email
+        end
+    end
 end

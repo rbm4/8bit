@@ -43,6 +43,7 @@ task :roll_lotterys, [:private, :id, :public, :sendgrid] => :environment do |t, 
                         a.wallet = piscina_tickets[premiado]
                         a.qtd = premio_string
                         a.position = position
+                        a.currency = cur
                         position += 1
                         result = Coinpayments.create_withdrawal(premio_string,cur,piscina_tickets[premiado], options = {auto_confirm: 1})
                         case result

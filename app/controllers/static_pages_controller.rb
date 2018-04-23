@@ -18,6 +18,11 @@ class StaticPagesController < ApplicationController
             @total = 0
         end
     end
+    def save_email
+        email = Email.new
+        email.email = params[:email]
+        email.save
+    end
     def buy_ticket
         if Integer(buy_params[:amount]) <= 0
             @invalid = true

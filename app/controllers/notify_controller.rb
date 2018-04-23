@@ -25,7 +25,22 @@ class NotifyController < ApplicationController
                     tck.size = Integer(tck.size) + Integer(@payment.amount_tck)
                 end
                 tck.save
-            elsif @payment.status != "completo"
+            elsif @payment.status != "completo" and BigDecimal(params["amount"],8) <= BigDecimal(BigDecimal(@payment.amount_tck) * COST[:"#{params[:currency]}"])
+                @payment.status = "parcial"
+                @ticket = Ticket.where("wallet = :addr and active = :act", { addr: @payment.address_receive, act: true})
+                amount = (BigDecimal(params["amount"],8) / BigDecimal(COST[:"#{params[:currency]}"])).floor
+                if @ticket.empty?
+                    tck = Ticket.new
+                    tck.size = amount
+                    tck.active = true
+                    tck.wallet = @payment.address_receive
+                    tck.currency = @payment.currency
+                    @payment.amount_tck = @payment.amount_tck - amount
+                else
+                    tck = @ticket.first
+                    tck.size = Integer(tck.size) + Integer(amount)
+                end
+                tck.save
                 # TODO: pagamento de ticket parcial
             end
             @payment.save
