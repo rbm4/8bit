@@ -1,6 +1,9 @@
 class StaticPagesController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [:index]
     def index
+        time_now = Time.now
+        next_month = time_now + 1.month
+        @string_date = next_month.strftime("%b 1, %Y 12:00:00")
         if  params[:currency].nil?
             @currency = "BTC"
         else
@@ -21,7 +24,11 @@ class StaticPagesController < ApplicationController
     def save_email
         email = Email.new
         email.email = params[:email]
-        email.save
+        if email.save
+            @message_controller = "Email salvo com sucesso!"
+        else
+            @message_controller = "Este email já está salvo!"
+        end
     end
     def buy_ticket
         if Integer(buy_params[:amount]) <= 0
