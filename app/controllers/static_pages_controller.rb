@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-    skip_before_action :verify_authenticity_token, only: [:index]
+    skip_before_action :verify_authenticity_token, only: [:index, :save_email]
     def index
         time_now = Time.now
         next_month = time_now + 1.month
