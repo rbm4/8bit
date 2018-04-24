@@ -1,25 +1,29 @@
 Esta tela apenas mostra o total que cada endereço comprou, em tickets, por sorteio, tomando como data a última compra daquele sorteio específico.<br>
-<b>Cada linha é equivalente a 1 sorteio.</b>
-<div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Carteira: </div>
-    <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9"><b><%= @tickets.first.wallet %></b></div>
-</div>
-<div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Moeda: </div>
-    <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9"><b><%= @tickets.first.currency %></b></div>
-</div>
-<% @tickets.each do |tck| %>
-<hr>
-<div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Quantidade</div>
-    <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.size %></b></div>
-</div>
-<div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Ativo?</div>
-    <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3"><b><% if tck.active %>Ativo<% else %>Inativo<% end %></b></div>
-</div>
-<div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Data</div>
-    <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.updated_at.strftime("%d/%m/%Y, %H:%M:%S H") %></b></div>
-</div>
+<label class="red">Cada linha é equivalente a 1 sorteio.</label>
+<% if @tickets.empty? %>
+    <h5> Não Há nenhum ticket comprado para este endereço. </h5>
+<% else %>
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Carteira: </div>
+        <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9"><b><%= @tickets.first.wallet %></b></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Moeda: </div>
+        <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9"><b><%= @tickets.first.currency %></b></div>
+    </div>
+    <% @tickets.each do |tck| %>
+    <hr>
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Quantidade</div>
+        <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.size %></b></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Ativo?</div>
+        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3"><b><% if tck.active %>Ativo<% else %>Inativo<% end %></b></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Data</div>
+        <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.updated_at.strftime("%d/%m/%Y, %H:%M:%S") %></b></div>
+    </div>
+    <% end %>
 <% end %>
