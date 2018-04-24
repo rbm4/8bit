@@ -1,6 +1,6 @@
 task :roll_lotterys, [:private, :id, :public, :sendgrid] => :environment do |t, chave|
     # parâmetros de sorteio
-    currencies = ["BTC","DOGE","LTC","ETH","DASH","BCH","DGB", "GRC"]
+    currencies = ["BCH", "BTC","DOGE","LTC","ETH","DASH","DGB","GRC"]
     proportions = [0.55,0.25,0.10,0.05,0.04]
     cost = {BTC: BigDecimal("0.001"), DOGE: BigDecimal("1"), LTC: BigDecimal("0.004"), BCH: BigDecimal("0.0004"), DASH: BigDecimal("0.002"), ETH: BigDecimal("0.0024"), DGB: BigDecimal("0.002"),  GRC: BigDecimal("0.0002")}
     chave.with_defaults(:private => "default_secret_value", :id => "default_id_value", :public => "default_public_value" ,:sendgrid => "default_sendgrid_value")
