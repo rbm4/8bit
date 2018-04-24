@@ -22,7 +22,7 @@ class StaticPagesController < ApplicationController
         end
     end
     def save_email
-        email = Email.new
+        email = Deliver.new
         email.email = params[:email]
         if email.save
             @message_controller = "Email salvo com sucesso!"

@@ -2,16 +2,16 @@ task :roll_lotterys, [:private, :id, :public, :sendgrid] => :environment do |t, 
     # parâmetros de sorteio
     currencies = ["BTC","DOGE","LTC","ETH","DASH","BCH","DGB", "GRC"]
     proportions = [0.40,0.20,0.10,0.08,0.06,0.05,0.04,0.03,0.02,0.01]
-    cost = {BTC: BigDecimal("0.00005"), DOGE: BigDecimal("1"), LTC: BigDecimal("0.0003"), BCH: BigDecimal("0.00005"), DASH: BigDecimal("0.0002"), ETH: BigDecimal("0.0002"), DGB: BigDecimal("0.3"),  GRC: BigDecimal("0.7")}
+    cost = {BTC: BigDecimal("0.001"), DOGE: BigDecimal("1"), LTC: BigDecimal("0.004"), BCH: BigDecimal("0.0004"), DASH: BigDecimal("0.002"), ETH: BigDecimal("0.0024"), DGB: BigDecimal("0.002"),  GRC: BigDecimal("0.0002")}
     chave.with_defaults(:private => "default_secret_value", :id => "default_id_value", :public => "default_public_value" ,:sendgrid => "default_sendgrid_value")
     loterium = Loterium.new
     loterium.configure_cpay({"CPAY_ID": chave.id, "CPAY_PRIVATE": chave.private, "CPAY_PUBLIC":  chave.public})
-    
     if Time.now.strftime("%d") == "1"
         sorteio = Sorteio.new
         sorteio.save
         puts "data correta"
         currencies.each do |cur|
+            valor_inicial = BigDecimal(loterium.get_saldo(cur))
             p "moeda: #{cur}"
             tickets = Ticket.where("active = :act and currency = :crr", {act: true, crr: cur})
             total_sorteavel = 0
@@ -30,7 +30,7 @@ task :roll_lotterys, [:private, :id, :public, :sendgrid] => :environment do |t, 
             proporcoes_premios = proportions
             proporcoes_premios.each do |k|
                 premiado = rand(0...total_sorteavel)
-                premio_string = ((BigDecimal(loterium.get_saldo(cur)) * k) * 0.995 ).truncate(8).to_s
+                premio_string = ((valor_inicial * k) * 0.995 ).truncate(8).to_s
                 puts "premio = #{premio_string}"
                 if !(piscina_tickets.empty?)
                     puts 'entregar premio'
@@ -75,7 +75,7 @@ task :roll_lotterys, [:private, :id, :public, :sendgrid] => :environment do |t, 
             g.save
         end
         p "Sorteio concluído"
-        # loterium.parabenizar_ganho(user_premiado, premio_string, chave.sendgrid) notificar usuários sobre 
+        loterium.notify_lot_result(currencies, chave.sendgrid)
     else
         p "data errada, não fazer nada"
     end
