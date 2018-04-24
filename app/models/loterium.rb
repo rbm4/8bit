@@ -38,7 +38,7 @@ class Loterium < ApplicationRecord
         k.each do |deliver|
             
             to = Email.new(email: deliver.email)
-            content = Content.new(type: 'text/plain', value: string_corpo_email)
+            content = Content.new(type: 'text/html', value: string_corpo_email)
             mail = Mail.new(from, subject, to, content)
             
             sg = SendGrid::API.new(api_key: key)
