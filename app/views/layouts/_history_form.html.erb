@@ -1,12 +1,13 @@
-<%= form_tag "/email_notify", remote: true %>
-<table>
+<%= form_tag "/wallet_history", remote: true %>
+<table class="fill-width">
     <tr>
         <td>
             <%= text_field_tag "wallet", nil, placeholder: "Endereço #{@currency}",  class: "form-control" %>
         </td>
         <td>
-            <%= submit_tag "Enviar", class: "form-control" %>
+            <%= submit_tag "Enviar", class: "form-control", data: {toggle: "modal", target: "#myModal"} %>
         </td>
     </tr>
 </table>
 </form>
+

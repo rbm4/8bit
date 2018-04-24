@@ -11,6 +11,29 @@
   <script src='https://www.google.com/recaptcha/api.js'></script>
 
   <body>
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Histórico</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+              <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+          </div>
+    
+        </div>
+      </div>
+    </div>
     <div class="row no-margin">
       <%= yield %>  
     </div>

@@ -23,12 +23,21 @@ class StaticPagesController < ApplicationController
     end
     def save_email
         email = Deliver.new
+        
         email.email = params[:email]
         if email.save
             @message_controller = "Email salvo com sucesso!"
         else
-            @message_controller = "Este email já está salvo!"
+            case email.errors.messages[:email]
+            when "is invalid"
+                @message_controller = "Email Inválido!"    
+            when "has already been taken"
+                @message_controller = "Email já foi salvo!"    
+            end
         end
+    end
+    def history
+        @tickets = Ticket.where("wallet = :wlt", {wlt: params[:wallet]})
     end
     def buy_ticket
         if Integer(buy_params[:amount]) <= 0

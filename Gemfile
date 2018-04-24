@@ -27,6 +27,7 @@ gem "font-awesome-rails"
 gem 'coinpayments', github: 'rbm4/coinpayments'
 gem 'rqrcode'
 gem 'sendgrid-ruby'
+gem "valid_email2"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

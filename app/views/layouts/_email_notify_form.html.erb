@@ -1,6 +1,6 @@
 <div id="email_input">
     <%= form_tag "/email_notify", remote: true %>
-    <table>
+    <table class="fill-width">
         <tr>
             <td>
                 <%= text_field_tag "email", nil, placeholder: "Insira seu email", :maxlength => 40, class: "form-control" %>
