@@ -6,7 +6,7 @@ task :roll_lotterys, [:private, :id, :public, :sendgrid] => :environment do |t, 
     chave.with_defaults(:private => "default_secret_value", :id => "default_id_value", :public => "default_public_value" ,:sendgrid => "default_sendgrid_value")
     loterium = Loterium.new
     loterium.configure_cpay({"CPAY_ID": chave.id, "CPAY_PRIVATE": chave.private, "CPAY_PUBLIC":  chave.public})
-    if Time.now.strftime("%d") == "1"
+    if Time.now.strftime("%d") == "01"
         sorteio = Sorteio.new
         sorteio.save
         puts "data correta"

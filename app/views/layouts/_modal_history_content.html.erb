@@ -12,18 +12,28 @@ Esta tela apenas mostra o total que cada endereço comprou, em tickets, por sort
         <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9"><b><%= @tickets.first.currency %></b></div>
     </div>
     <% @tickets.each do |tck| %>
-    <hr>
-    <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Quantidade</div>
-        <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.size %></b></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Ativo?</div>
-        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3"><b><% if tck.active %>Ativo<% else %>Inativo<% end %></b></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">Data</div>
-        <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.updated_at.strftime("%d/%m/%Y, %H:%M:%S") %></b></div>
+    <div class="font-small">
+        <hr>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">Identificador:</div>
+            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.id %></b></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">Quantidade de tickets:</div>
+            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.size %></b></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">Valor investido:</div>
+            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= (BigDecimal(tck.size) * COST[:"#{tck.currency}"] ) %> <%= tck.currency %></b></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">Ativo?</div>
+            <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3"><b><% if tck.active %>Ativo<% else %>Inativo<% end %></b></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">Data:</div>
+            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6"><b><%= tck.updated_at.strftime("%d/%m/%Y, %H:%M:%S") %></b></div>
+        </div>
     </div>
     <% end %>
 <% end %>
